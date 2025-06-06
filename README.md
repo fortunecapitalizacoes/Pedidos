@@ -2,7 +2,7 @@
 
 Este sistema representa uma arquitetura simplificada para um processo de pedidos, onde um cliente interage com um microserviço responsável pelo processamento.
 
-![Diagrama da Arquitetura](https://raw.githubusercontent.com/fortunecapitalizacoes/Pagamentos/refs/heads/main/Pagamentos.jpg)
+![Diagrama da Arquitetura](https://raw.githubusercontent.com/fortunecapitalizacoes/Pedidos/refs/heads/main/Pedido.jpg)
 
 ## Visão Geral
 
@@ -76,6 +76,10 @@ mvn spring-boot:run
 
 ---
 
-## Veja
+## Veja o projeto de pagamentos
+
+https://github.com/fortunecapitalizacoes/Pagamentos
+
+
 
 

@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controlador REST responsável por expor os endpoints relacionados à gestão de pedidos.
+ * 
+ * Permite criar, listar, atualizar status e buscar pedidos por ID através de chamadas HTTP.
+ * Utiliza o serviço de domínio {@link DomainServices} para orquestrar as operações de negócio.
+ */
 @Slf4j
 @RestController
 @RequestMapping("/api/pedidos")
@@ -17,16 +23,21 @@ public class PedidosController {
 
     private final DomainServices domainServices;
 
+    /**
+     * Construtor com injeção de dependência do serviço de domínio.
+     *
+     * @param domainServices Serviço de domínio que contém a lógica de negócios para pedidos.
+     */
     @Autowired
     public PedidosController(DomainServices domainServices) {
         this.domainServices = domainServices;
     }
 
     /**
-     * Cria um novo pedido.
+     * Endpoint para criação de um novo pedido.
      *
-     * @param pedido Objeto {@link PedidoEntity} contendo os dados do pedido.
-     * @return {@link ResponseEntity} com o pedido criado.
+     * @param pedido Objeto {@link PedidoEntity} enviado no corpo da requisição com os dados do novo pedido.
+     * @return {@link ResponseEntity} contendo o pedido criado e status HTTP 200.
      */
     @PostMapping
     public ResponseEntity<PedidoEntity> criarPedido(@RequestBody PedidoEntity pedido) {
@@ -37,9 +48,9 @@ public class PedidosController {
     }
 
     /**
-     * Retorna todos os pedidos cadastrados.
+     * Endpoint para listar todos os pedidos cadastrados.
      *
-     * @return Lista de {@link PedidoEntity}.
+     * @return {@link ResponseEntity} com a lista de {@link PedidoEntity} e status HTTP 200.
      */
     @GetMapping
     public ResponseEntity<List<PedidoEntity>> listarPedidos() {
@@ -50,11 +61,11 @@ public class PedidosController {
     }
 
     /**
-     * Atualiza o status de um pedido existente.
+     * Endpoint para atualizar o status de um pedido existente.
      *
      * @param id     ID do pedido a ser atualizado.
-     * @param status Novo status do pedido.
-     * @return {@link ResponseEntity} com o pedido atualizado, ou 404 se não encontrado.
+     * @param status Novo status desejado para o pedido.
+     * @return {@link ResponseEntity} com o pedido atualizado ou status 404 se o pedido não for encontrado.
      */
     @PutMapping("/{id}/status")
     public ResponseEntity<PedidoEntity> atualizarStatus(
@@ -73,10 +84,10 @@ public class PedidosController {
     }
 
     /**
-     * Busca um pedido pelo seu ID.
+     * Endpoint para buscar um pedido pelo seu identificador único.
      *
-     * @param id ID do pedido.
-     * @return {@link ResponseEntity} com o pedido encontrado, ou 404 se não encontrado.
+     * @param id ID do pedido a ser buscado.
+     * @return {@link ResponseEntity} com o pedido encontrado ou status 404 e mensagem de erro caso não exista.
      */
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarPedidoPorId(@PathVariable("id") Long id) {
